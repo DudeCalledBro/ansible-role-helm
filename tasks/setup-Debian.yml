@@ -1,0 +1,24 @@
+- name: Install helm apt repository dependencies
+  ansible.builtin.apt:
+    name: apt-transport-https
+    state: present
+
+- name: Ensure apt keyrings directory exists
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+
+- name: Setup helm apt repository key
+  ansible.builtin.get_url:
+    url: "{{ helm_apt_repository_key }}"
+    dest: /etc/apt/trusted.gpg.d/helm.asc
+    mode: 0644
+
+- name: Setup helm apt repository
+  ansible.builtin.apt_repository:
+    repo: "{{ helm_apt_repository }}"
+    state: present
+    filename: "{{ helm_apt_repository_filename }}"

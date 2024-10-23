@@ -1,0 +1,18 @@
+argument_specs:
+  main:
+    short_description: helm
+    description: "Install helm package manager for kubernetes."
+    author: dudecalledbro
+    options:
+      helm_apt_repository_key:
+        type: str
+        description: "Set helm apt repository key."
+      helm_apt_arch:
+        type: str
+        description: "Set helm apt repository required architecture."
+      helm_apt_repository:
+        type: str
+        description: "Setup helm apt repository."
+      helm_apt_repository_filename:
+        type: str
+        description: "Set helm apt repository filename."

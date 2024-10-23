@@ -1,0 +1,10 @@
+- name: Setup helm repository
+  when: tasks_file | length
+  ansible.builtin.include_tasks: "{{ tasks_file }}"
+  vars:
+    tasks_file: "{{ lookup('ansible.builtin.first_found', files=['setup-{{ ansible_os_family }}.yml'], errors='ignore') }}"
+
+- name: Install helm package manager
+  ansible.builtin.package:
+    name: helm
+    state: present
